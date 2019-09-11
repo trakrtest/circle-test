@@ -10,5 +10,5 @@
            command: sudo cp -R ~/project /var/www/html/
        - run: 
            name: Start apache
-           command: sudo /init.d/apache2 start
+           command: sudo /etc/init.d/apache2 start
       
