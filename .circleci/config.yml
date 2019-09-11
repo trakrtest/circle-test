@@ -5,4 +5,10 @@
        - image: circleci/php:7.1-apache
      steps:
        - checkout
-       - run: echo "A first hello"
+       - run:
+           name: Copy project directory to default apache root
+           command: sudo cp -R ~/project /var/www/html/
+       - run: 
+           name: Start apache
+           command: sudo /init.d/apache2 start
+      
