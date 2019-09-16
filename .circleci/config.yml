@@ -8,7 +8,16 @@
        - run:
            name: Copy project directory to default apache root
            command: sudo cp -R ~/project /var/www/html/
+       - run:
+           name: Install localtunnel
+           command: sudo apt-get update
+       - run: sudo apt-get install curl software-properties-common
+       - run: curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
+       - run: sudo apt-get install nodejs
+       - run: sudo npm install -g localtunnel
        - run: 
            name: Start apache
            command: sudo /etc/init.d/apache2 start
-      
+       - run:
+           name: Start tunnel
+           command: sudo lt --port 80
