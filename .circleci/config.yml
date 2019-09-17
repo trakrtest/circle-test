@@ -20,4 +20,4 @@
            command: sudo /etc/init.d/apache2 start
        - run:
            name: Start tunnel
-           command: sudo lt --port 80
+           command: sudo lt --port 80 > /var/log/localtunnel.log &
