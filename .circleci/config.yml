@@ -3,6 +3,8 @@
    build:
      docker:
        - image: circleci/php:7.1-apache
+     environment:
+       TRAKR_BASE_ENV: production
      steps:
        - checkout
        - run:
