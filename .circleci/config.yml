@@ -23,6 +23,7 @@
        - run:
            name: Start tunnel
            command: sudo lt --port 80 > /home/circleci/localtunnel.log
+           background: true
        - run:
            name: Start visual test
            command: sudo git clone https://github.com/makehero/trakr_circleci.git /home/circleci/trakr_circleci
