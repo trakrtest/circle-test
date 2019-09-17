@@ -27,7 +27,7 @@
        - run:
            name: Start visual test
            command: sudo git clone https://github.com/makehero/trakr_circleci.git /home/circleci/trakr_circleci
-       - run: cd /home/circleci/trakr_circleci && npm install
+       - run: cd /home/circleci/trakr_circleci && sudo npm install
        - run: node /home/circleci/trakr_circleci/test.js
        - store_artifacts:
            path: /home/circleci/trakr_result.log
