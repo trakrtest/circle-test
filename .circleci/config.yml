@@ -21,14 +21,16 @@
            name: Start apache
            command: sudo /etc/init.d/apache2 start
        - run:
-           name: Start tunnel
-           command: sudo lt --port 80 > /home/circleci/localtunnel.log
-           background: true
-       - run:
-           name: Start visual test
+           name: Clone test integration
            command: sudo git clone https://github.com/makehero/trakr_circleci.git /home/circleci/trakr_circleci
        - run: cd /home/circleci/trakr_circleci && sudo npm install
-       - run: node /home/circleci/trakr_circleci/test.js
+       - run:
+           name: Start tunnel
+           command: sh /home/circleci/trakr_circleci/start_tunnel.sh
+           background: true
+       - run: 
+           name: Run Trakr test
+           command: node /home/circleci/trakr_circleci/test.js
        - store_artifacts:
            path: /home/circleci/trakr_result.log
-    
+      
