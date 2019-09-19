@@ -3,8 +3,8 @@ version: 2.1
 orbs:
   trakr: trakr-test/web-test@dev:first
 
- jobs:
-   build:
+jobs:
+  build:
      docker:
        - image: circleci/php:7.1-apache
      environment:
