@@ -3,10 +3,14 @@ version: 2.1
 orbs:
   trakr: trakrtest/web-test@dev:0.0.1
 
+executors:
+  lamp:
+    docker:
+      - image: circleci/php:7.1-apache
+
 jobs:
   build:
-     docker:
-       - image: circleci/php:7.1-apache
+     executor: lamp
      environment:
        TRAKR_BASE_ENV: production
      steps:
@@ -17,6 +21,8 @@ jobs:
        - run:
            name: Start apache
            command: sudo /etc/init.d/apache2 start
+  tunnel:
+      executor: lamp
        - run:
            name: Install localtunnel
            command: sudo apt-get update
@@ -31,5 +37,15 @@ jobs:
        - run:
            name: Start tunnel
            command: sh $HOME/trakr_circleci/start_tunnel.sh
-           background: true
-  trakr_test: trakr/trakr_test
+           #background: true
+
+workflows:
+  build-tunnel-test:
+    jobs:
+      - build
+      - tunnel:
+          requires:
+            - build
+      - trakr/trakr_test:
+          requires:
+            - build
