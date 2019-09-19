@@ -23,6 +23,7 @@ jobs:
            command: sudo /etc/init.d/apache2 start
   tunnel:
       executor: lamp
+      steps:
        - run:
            name: Install localtunnel
            command: sudo apt-get update
