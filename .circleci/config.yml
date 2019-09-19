@@ -1,36 +1,16 @@
- version: 2
+ version: 2.1
  jobs:
    build:
      docker:
-       - image: circleci/php:7.1-apache
+       - image: circleci/node:lts
      environment:
        TRAKR_BASE_ENV: production
      steps:
        - checkout
-       - run:
-           name: Copy project directory to default apache root
-           command: sudo cp -R ~/project /var/www/html/
-       - run:
-           name: Install localtunnel
-           command: sudo apt-get update
-       - run: sudo apt-get install curl software-properties-common
-       - run: curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
-       - run: sudo apt-get install nodejs
        - run: sudo npm install -g localtunnel
-       - run: 
-           name: Start apache
-           command: sudo /etc/init.d/apache2 start
-       - run:
-           name: Clone test integration
-           command: sudo git clone https://github.com/makehero/trakr_circleci.git /home/circleci/trakr_circleci
-       - run: cd /home/circleci/trakr_circleci && sudo npm install
+       - run: sudo git clone https://github.com/makehero/trakr_circleci.git $HOME/trakr_circleci
+       - run: cd $HOME/trakr_circleci && sudo npm install
        - run:
            name: Start tunnel
-           command: sh /home/circleci/trakr_circleci/start_tunnel.sh
+           command: sh $HOME/trakr_circleci/start_tunnel.sh
            background: true
-       - run: 
-           name: Run Trakr test
-           command: node /home/circleci/trakr_circleci/test.js
-       - store_artifacts:
-           path: /home/circleci/trakr_result.log
-      
