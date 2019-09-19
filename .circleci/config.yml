@@ -12,23 +12,14 @@ jobs:
        TRAKR_BASE_ENV: production
      steps:
        - checkout
-       - run:
-           name: Copy project directory to default apache root
-           command: sudo cp -R ~/project /var/www/html/
-       - run:
-           name: Start apache
-           command: sudo /etc/init.d/apache2 start
-  tunnel-test:
-      executor: lamp
-      steps:
+       - run: sudo cp -R ~/project /var/www/html/
+       - run: sudo /etc/init.d/apache2 start
        - run: sudo apt-get update
        - run: sudo apt-get install curl software-properties-common
        - run: curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
        - run: sudo apt-get install nodejs
        - run: sudo npm install -g localtunnel
-       - run:
-           name: Clone test integration
-           command: sudo git clone https://github.com/makehero/trakr_circleci.git $HOME/trakr_circleci
+       - run: sudo git clone https://github.com/makehero/trakr_circleci.git $HOME/trakr_circleci
        - run: cd $HOME/trakr_circleci && sudo npm install
        - run:
            name: Start tunnel
@@ -44,6 +35,3 @@ workflows:
   build-tunnel-test:
     jobs:
       - build
-      - tunnel-test:
-          requires:
-            - build
