@@ -37,4 +37,4 @@ workflows:
   build-tunnel-test:
     jobs:
       - build
-      - trakr/trakr-test
+      - trakr/trakr_test
