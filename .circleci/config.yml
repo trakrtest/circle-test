@@ -32,5 +32,4 @@ jobs:
            name: Start tunnel
            command: sh $HOME/trakr_circleci/start_tunnel.sh
            background: true
-    trakr_test: trakr/trakr_test
-  
+  trakr_test: trakr/trakr_test
