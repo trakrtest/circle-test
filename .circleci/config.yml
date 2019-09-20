@@ -26,8 +26,3 @@ jobs:
           command: BUILD_URL=https://trakr-project-$TRAKR_PROJECT_ID.localtunnel.me node $HOME/trakr_circleci/test.js
        - store_artifacts:
            path: /home/circleci/trakr_result.log
-
-workflows:
-  build-tunnel-test:
-    jobs:
-      - build
