@@ -1,4 +1,4 @@
-version: 2.1
+version: 2.0
 
 executors:
   lamp:
@@ -10,9 +10,10 @@ jobs:
      executor: lamp
      environment:
        TRAKR_BASE_ENV: production
+       TUNNEL_PORT: 80
      steps:
        - checkout
-       - run: sudo cp -R ~/project /var/www/html/
+       - run: sudo cp -r ~/project/* /var/www/html/
        - run: sudo /etc/init.d/apache2 start
        - run: sudo apt-get update
        - run: sudo apt-get install curl software-properties-common
