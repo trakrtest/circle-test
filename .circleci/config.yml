@@ -1,13 +1,8 @@
-version: 2.1
-
-executors:
-  lamp:
-    docker:
-      - image: circleci/php:7.1-apache
-
+version: 2
 jobs:
   build:
-     executor: lamp
+     docker:
+       - image: circleci/php:7.1-apache
      environment:
        TRAKR_BASE_ENV: production
        TUNNEL_PORT: 80
