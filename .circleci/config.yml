@@ -45,7 +45,7 @@ jobs:
        - trakr/fetch_test
        - trakr/trigger_test:
            trakr_base_env: production
-           delay_start: 30
+           delay_start: 30 # Delay the start for testing by 30 seconds 
 
 workflows:
   build-tunnel-test:
