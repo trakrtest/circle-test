@@ -40,6 +40,13 @@ jobs:
        - run:
           name: Check test status
           command: node $HOME/trakr_circleci/wait_for_test.js
+  test:
+     executor: trakrtest/default
+     steps:
+       - trakr/fetch_test
+       - trakr/trigger_test:
+           trakr_base_env: production
+           delay_start: 10
 
 workflows:
   build-tunnel-test:
@@ -48,11 +55,6 @@ workflows:
       - tunnel:
           requires:
             - build
-      - visual_test:
-        steps:
-          - trakr/fetch_test
-          - trakr/trigger_test:
-              trakr_base_env: production
-              delay_start: 10
+      - test:
           requires:
             - build
