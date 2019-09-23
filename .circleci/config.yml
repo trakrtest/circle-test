@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  trakr: trakrtest/web-test@dev:0.0.2
+  trakr: trakr/web-test@0.0.1
 
 executors:
   lamp:
@@ -45,7 +45,7 @@ jobs:
        - trakr/fetch_test
        - trakr/trigger_test:
            trakr_base_env: production
-           delay_start: 30 # Delay the start for testing by 30 seconds 
+           delay_start: 30 # Delay the start for testing by 30 seconds
 
 workflows:
   build-tunnel-test:
