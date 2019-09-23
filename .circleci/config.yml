@@ -41,7 +41,7 @@ jobs:
           name: Check test status
           command: node $HOME/trakr_circleci/wait_for_test.js
   test:
-     executor: trakrtest/default
+     executor: trakr/default
      steps:
        - trakr/fetch_test
        - trakr/trigger_test:
