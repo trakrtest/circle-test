@@ -48,8 +48,11 @@ workflows:
       - tunnel:
           requires:
             - build
-      - trakr/trakr_test:
-          trakr_base_env: production
-          delay_start: 10
+      - visual_test:
+        steps:
+          trakr/fetch_test
+          trakr/trigger_test:
+            trakr_base_env: production
+            delay_start: 10
           requires:
             - build
