@@ -49,7 +49,7 @@ workflows:
           requires:
             - build
       - trakr/trakr_test:
-          base_environment: production
+          trakr_base_env: production
           delay_start: 10
           requires:
             - build
