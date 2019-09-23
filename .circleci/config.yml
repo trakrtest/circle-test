@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  trakr: trakrtest/web-test@dev:0.0.1
+  trakr: trakrtest/web-test@dev:0.0.2
 
 executors:
   lamp:
@@ -11,13 +11,11 @@ executors:
 jobs:
   build:
      executor: lamp
-     environment:
-       TRAKR_BASE_ENV: production
      steps:
        - checkout
        - run:
            name: Copy project directory to default apache root
-           command: sudo cp -R ~/project /var/www/html/
+           command: sudo cp -r ~/project/* /var/www/html/
        - run:
            name: Start apache
            command: sudo /etc/init.d/apache2 start
@@ -38,7 +36,10 @@ jobs:
        - run:
            name: Start tunnel
            command: sh $HOME/trakr_circleci/start_tunnel.sh
-           #background: true
+           background: true
+      - run:
+          name: Check test status
+          command: node $HOME/trakr_circleci/wait_for_test.js
 
 workflows:
   build-tunnel-test:
@@ -48,5 +49,7 @@ workflows:
           requires:
             - build
       - trakr/trakr_test:
+          base_environment: production
+          delay_start: 10
           requires:
             - build
