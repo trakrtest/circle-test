@@ -45,12 +45,10 @@ jobs:
        - trakr/fetch_test
        - trakr/trigger_test:
            trakr_base_env: production
-           delay_start: 10
+           delay_start: 30
 
 workflows:
   build-tunnel-test:
     jobs:
       - build
-      - test:
-          requires:
-            - build
+      - test
