@@ -37,7 +37,7 @@ jobs:
            name: Start tunnel
            command: sh $HOME/trakr_circleci/start_tunnel.sh
            background: true
-      - run:
+       - run:
           name: Check test status
           command: node $HOME/trakr_circleci/wait_for_test.js
 
